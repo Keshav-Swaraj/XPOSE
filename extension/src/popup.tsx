@@ -1,12 +1,13 @@
 import "~style.css"
+import logo from "data-base64:~assets/icon.png"
 
 function IndexPopup() {
   return (
     <div className="w-80 bg-white font-sans flex flex-col shadow-xl border-t-4 border-blue-600">
       <div className="bg-gray-50 p-5 border-b">
         <div className="flex items-center space-x-3 mb-2">
-          <div className="bg-blue-100 p-2 rounded-full">
-            <span className="text-2xl">🌬️</span>
+          <div className="bg-blue-50 p-1 rounded-full border border-blue-100 shadow-sm">
+            <img src={logo} alt="XPOSE Logo" className="w-8 h-8 rounded-full object-cover" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800 tracking-tight">XPOSE</h1>
