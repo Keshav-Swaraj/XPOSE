@@ -2,7 +2,7 @@
   "name": "extension",
   "displayName": "Extension",
   "version": "0.0.1",
-  "description": "Vaayu Browser Extension\\n",
+  "description": "XPOSE Browser Extension\\n",
   "author": "Plasmo Corp. <foss@plasmo.com>",
   "scripts": {
     "dev": "plasmo dev",

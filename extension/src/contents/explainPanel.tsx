@@ -52,7 +52,7 @@ export default function ExplainPanel() {
         setExplanation(data.data)
       }
     } catch (e) {
-      console.error("Vaayu Explain Error:", e)
+      console.error("XPOSE Explain Error:", e)
     } finally {
       setLoading(false)
     }
@@ -67,7 +67,7 @@ export default function ExplainPanel() {
           className="fixed bottom-6 right-6 z-[999998] bg-[#1e1e1e] border border-[#3c4043] text-[#e3e3e3] rounded-2xl py-3 px-5 shadow-2xl hover:bg-[#2d2e30] transition-all flex items-center space-x-2 group"
         >
           <span className="text-xl">🌬️</span>
-          <span className="font-semibold tracking-wide">Ask Vaayu</span>
+          <span className="font-semibold tracking-wide">Ask XPOSE</span>
         </button>
       )}
 
@@ -82,7 +82,7 @@ export default function ExplainPanel() {
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🌬️</span>
             <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-              Vaayu Explain
+              XPOSE Explain
             </h2>
           </div>
           <button 

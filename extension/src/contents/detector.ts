@@ -31,10 +31,10 @@ function scanNodeForDarkPatterns(text: string) {
   for (const pattern of DARK_PATTERNS) {
     const match = text.match(pattern.regex)
     if (match) {
-      console.warn(`[Vaayu] Dark pattern detected: ${pattern.type}`, match[0])
+      console.warn(`[XPOSE] Dark pattern detected: ${pattern.type}`, match[0])
       
       // Dispatch event to RedBanner
-      const event = new CustomEvent("VAAYU_DARK_PATTERN_DETECTED", {
+      const event = new CustomEvent("XPOSE_DARK_PATTERN_DETECTED", {
         detail: {
           type: pattern.type,
           message: pattern.message,

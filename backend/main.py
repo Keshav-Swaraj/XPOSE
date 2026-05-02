@@ -9,7 +9,7 @@ from groq import Groq
 # Load environment variables
 load_dotenv()
 
-app = FastAPI(title="Vaayu Backend", description="The Intelligence Layer for Vaayu Extension")
+app = FastAPI(title="XPOSE Backend", description="The Intelligence Layer for XPOSE Extension")
 
 # Add CORS to allow the extension to communicate with the backend
 app.add_middleware(
@@ -31,16 +31,16 @@ class ExplainRequest(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Vaayu Backend is running. The Guardian is awake."}
+    return {"message": "XPOSE Backend is running. The Guardian is awake."}
 
 @app.post("/api/explain")
 def explain_page(request: ExplainRequest):
     if not client:
         raise HTTPException(status_code=500, detail="GROQ_API_KEY is not set.")
     
-    # Define the system prompt for Vaayu
+    # Define the system prompt for XPOSE
     system_prompt = f"""
-    You are Vaayu, an AI designed to protect users from financial 'Dark Patterns'.
+    You are XPOSE, an AI designed to protect users from financial 'Dark Patterns'.
     You are analyzing the text from: {request.url}
     
     Extract the key terms, hidden fees, and risks from the text.

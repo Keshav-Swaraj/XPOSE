@@ -26,8 +26,8 @@ export default function RedBanner() {
       setShow(true)
     }
 
-    window.addEventListener("VAAYU_DARK_PATTERN_DETECTED", handleDarkPattern)
-    return () => window.removeEventListener("VAAYU_DARK_PATTERN_DETECTED", handleDarkPattern)
+    window.addEventListener("XPOSE_DARK_PATTERN_DETECTED", handleDarkPattern)
+    return () => window.removeEventListener("XPOSE_DARK_PATTERN_DETECTED", handleDarkPattern)
   }, [])
 
   if (!show) return null
@@ -37,7 +37,7 @@ export default function RedBanner() {
       <div className="flex items-center space-x-3">
         <span className="text-2xl">⚠️</span>
         <div>
-          <h1 className="font-bold text-lg">Vaayu Alert: Potential Dark Pattern Detected</h1>
+          <h1 className="font-bold text-lg">XPOSE Alert: Potential Dark Pattern Detected</h1>
           <p className="text-sm">{message}</p>
           {trueCost && <p className="font-semibold mt-1">Estimated True Cost: {trueCost}</p>}
         </div>

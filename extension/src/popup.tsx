@@ -9,7 +9,7 @@ function IndexPopup() {
             <span className="text-2xl">🌬️</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-800 tracking-tight">Vaayu</h1>
+            <h1 className="text-xl font-bold text-gray-800 tracking-tight">XPOSE</h1>
             <p className="text-xs text-green-600 font-semibold flex items-center">
               <span className="w-2 h-2 rounded-full bg-green-500 mr-1 animate-pulse"></span>
               Guardian Active
@@ -34,7 +34,7 @@ function IndexPopup() {
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-all active:scale-[0.98] shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
           onClick={() => {
             // Future: open full web dashboard
-            window.open("https://vaayu.in", "_blank")
+            window.open("https://xpose.in", "_blank")
           }}
         >
           <span>Open Dashboard</span>
@@ -43,7 +43,7 @@ function IndexPopup() {
       </div>
 
       <div className="bg-gray-100 p-3 text-center text-xs text-gray-500 border-t">
-        Vaayu v1.0 • Sprint 1
+        XPOSE v1.0 • Sprint 1
       </div>
     </div>
   )
