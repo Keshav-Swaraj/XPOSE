@@ -1,7 +1,7 @@
 import type { PlasmoCSConfig } from "plasmo"
 import { useState, useEffect } from "react"
 import cssText from "data-text:~style.css"
-import logo from "data-base64:~assets/icon.png"
+import logo from "data-base64:~../assets/icon.png"
 
 export const config: PlasmoCSConfig = {
   matches: ["<all_urls>"]
@@ -33,6 +33,17 @@ export default function ExplainPanel() {
     }
   }, [isOpen])
 
+  // Listen for background script messages to toggle the sidebar
+  useEffect(() => {
+    const handleMessage = (message: any, sender: any, sendResponse: any) => {
+      if (message.action === "TOGGLE_XPOSE_SIDEBAR") {
+        setIsOpen((prev) => !prev)
+      }
+    }
+    chrome.runtime.onMessage.addListener(handleMessage)
+    return () => chrome.runtime.onMessage.removeListener(handleMessage)
+  }, [])
+
   const handleExplain = async () => {
     setLoading(true)
     try {
@@ -61,17 +72,6 @@ export default function ExplainPanel() {
 
   return (
     <div className="font-sans antialiased text-[#e3e3e3]">
-      {/* Floating Action Button - Only visible when panel is closed */}
-      {!isOpen && (
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-[999998] bg-[#1e1e1e] border border-[#3c4043] text-[#e3e3e3] rounded-2xl py-3 px-5 shadow-2xl hover:bg-[#2d2e30] transition-all flex items-center space-x-2 group"
-        >
-          <img src={logo} alt="XPOSE" className="w-6 h-6 rounded-full object-cover shadow-sm" />
-          <span className="font-semibold tracking-wide">Ask XPOSE</span>
-        </button>
-      )}
-
       {/* Sidebar Panel */}
       <div 
         className={`fixed top-0 right-0 h-full w-[400px] bg-[#131314] z-[999999] shadow-2xl p-6 flex flex-col border-l border-[#3c4043] transition-transform duration-300 ease-in-out ${
