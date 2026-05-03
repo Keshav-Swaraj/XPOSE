@@ -54,23 +54,25 @@ def explain_page(request: ExplainRequest):
     You are XPOSE, an AI financial guardian designed to protect users from financial 'Dark Patterns'.
     You are analyzing the text from: {request.url}
     
+    CRITICAL INSTRUCTION: You MUST translate ALL user-facing text into {request.language}. If {request.language} is not English, the output arrays and descriptions MUST be in {request.language}.
+
     Extract the key terms, hidden fees, risks, and dark patterns from the text.
     Return a JSON object containing:
-    1. 'summary': A simple, 2-sentence summary translated into {request.language}.
-    2. 'status': Either 'Safe', 'Attention', or 'Risky'.
-    3. 'risks': A list of strings detailing specific risks or hidden fees found (translate to {request.language}).
-    4. 'true_cost': If any fees or prices are mentioned, calculate a true cost string. Otherwise, return null.
-    5. 'highlights': A list of objects with 'text' (a short phrase from the page) and 'level' ('safe', 'attention', or 'risky') for the top 3 most important clauses.
+    1. 'summary': A simple, 2-sentence summary in {request.language}.
+    2. 'status': Either 'Safe', 'Attention', or 'Risky' (Keep this exactly as English).
+    3. 'risks': A list of strings detailing specific risks or hidden fees found. MUST be translated to {request.language}.
+    4. 'true_cost': If any fees or prices are mentioned, calculate a true cost string. Otherwise, return null. (Translate text to {request.language}).
+    5. 'highlights': A list of objects with 'text' (an exact, character-for-character short quote from the original English page so it can be highlighted), 'translated_text' (the translation of the quote in {request.language}), and 'level' ('safe', 'attention', or 'risky') for the top 3 most important clauses. Ensure 'text' is an exact substring of the original content.
     6. 'est_cost_value': The estimated cost mentioned (e.g., '₹3,200', '₹378'). If none, return 'N/A'.
-    7. 'est_cost_label': A concise label for the cost, such as 'Est. yearly cost', 'Est. monthly cost', 'Est. yearly impact', etc.
-    8. 'violations': A list of objects representing actual dark patterns or regulatory violations. Each object must have: 'pattern_name' (e.g. 'Consent data harvesting', 'Price anchoring'), 'severity' ('high', 'med', 'low'), 'description' (what is wrong), and 'regulation' (the law or rule it likely violates, e.g., 'Consumer Protection Act', 'IRDAI guidelines'). Only include actual deceptive practices or regulatory violations, NOT normal policy clauses.
+    7. 'est_cost_label': A concise label for the cost. MUST be translated to {request.language}.
+    8. 'violations': A list of objects representing actual dark patterns or regulatory violations. Each object must have: 'pattern_name' (Translate to {request.language}), 'severity' ('high', 'med', 'low'), 'description' (what is wrong, Translate to {request.language}), and 'regulation' (the law or rule it likely violates, Translate to {request.language}). Only include actual deceptive practices or regulatory violations, NOT normal policy clauses.
     
     Only output the JSON object. Do not output markdown code blocks.
     """
     
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Here is the page content:\n{request.content[:5000]}"}
@@ -124,7 +126,7 @@ def chat_with_page(request: ChatRequest):
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             messages=messages,
             temperature=0.4,
             max_tokens=512
