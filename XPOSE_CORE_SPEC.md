@@ -2,7 +2,8 @@
 
 **XPOSE** is a free browser extension + web platform that protects everyday Indians from financial manipulation and confusion on the internet.
 
-**Tagline:** "XPOSE explains, protects and fights for you."
+## Tagline
+XPOSE decodes, shields & exposes
 
 ## Core Problem It Solves
 
