@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XPOSE – Your Personal Financial Guardian</title>
+  <meta name="description" content="XPOSE protects everyday Indians from financial dark patterns, hidden fees, and manipulation on financial websites. Free browser extension + web platform." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="logo-x">X</span><span class="logo-pose">POSE</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Leaderboard</a>
+        <a href="calculator.html" class="nav-link">EMI Calculator</a>
+        <a href="scanner.html" class="nav-link">Insurance Scanner</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+      </div>
+      <a href="#install" class="btn-primary nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="white"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Install Free
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="nav-link">Leaderboard</a>
+      <a href="calculator.html" class="nav-link">EMI Calculator</a>
+      <a href="scanner.html" class="nav-link">Insurance Scanner</a>
+      <a href="reports.html" class="nav-link">Reports</a>
+      <a href="#install" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">Install Free</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Live Dark Pattern Intelligence
+      </div>
+      <h1 class="hero-title">
+        India's Financial
+        <span class="gradient-text">Manipulation</span>
+        Leaderboard
+      </h1>
+      <p class="hero-sub">
+        Real-time pressure scores for India's top financial websites — tracking dark patterns, hidden fees &amp; regulatory violations. Updated every 24 hours.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span class="stat-val">2,47,000+</span>
+          <span class="stat-label">Users Protected</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-val">₹3.2 Cr</span>
+          <span class="stat-label">Fees Exposed</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-val">1,840+</span>
+          <span class="stat-label">Dark Patterns Found</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVINGS TRACKER -->
+  <section class="savings-band">
+    <div class="container">
+      <div class="savings-inner">
+        <div class="savings-icon">🛡️</div>
+        <div class="savings-text">
+          <div class="savings-label">XPOSE Community Savings This Month</div>
+          <div class="savings-amount" id="savingsCounter">₹0</div>
+        </div>
+        <div class="savings-share">
+          <button class="btn-outline" onclick="alert('Share feature coming soon!')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M12 3v13M8 7l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Share
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="leaderboard-section" id="leaderboard">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">PRESSURE SCORES</div>
+        <h2 class="section-title">Financial Website Rankings</h2>
+        <p class="section-sub">Lower score = More trustworthy. Higher score = More manipulation detected.</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="insurance">Insurance</button>
+        <button class="filter-btn" data-cat="loans">Loans &amp; Credit</button>
+        <button class="filter-btn" data-cat="investment">Investments</button>
+        <button class="filter-btn" data-cat="payments">Payments</button>
+      </div>
+
+      <!-- Table Header -->
+      <div class="lb-table">
+        <div class="lb-thead">
+          <div class="lb-th rank">#</div>
+          <div class="lb-th site">Website</div>
+          <div class="lb-th score">Pressure Score</div>
+          <div class="lb-th patterns">Dark Patterns</div>
+          <div class="lb-th trend">Trend</div>
+          <div class="lb-th verdict">Verdict</div>
+          <div class="lb-th action"></div>
+        </div>
+
+        <div class="lb-body" id="lbBody">
+          <!-- Rows injected by JS -->
+        </div>
+      </div>
+
+      <div class="lb-footer-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Scores are computed from aggregated community scans. Data is anonymized. Last updated: Today, 6:00 AM IST
+      </div>
+    </div>
+  </section>
+
+  <!-- SITE DETAIL MODAL -->
+  <div class="modal-overlay" id="siteModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-site-info">
+          <div class="modal-site-icon" id="modalIcon"></div>
+          <div>
+            <h3 class="modal-site-name" id="modalName"></h3>
+            <div class="modal-site-url" id="modalUrl"></div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-score-row">
+          <div class="modal-score-circle">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="33" fill="none" stroke="#f0f0f0" stroke-width="8"/>
+              <circle cx="40" cy="40" r="33" fill="none" id="modalScoreRing" stroke="#E24B4A" stroke-width="8"
+                stroke-dasharray="207.3" stroke-dashoffset="207.3" stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1s ease"/>
+            </svg>
+            <div class="modal-score-inner">
+              <div class="modal-score-val" id="modalScoreVal"></div>
+              <div class="modal-score-sub">/100</div>
+            </div>
+          </div>
+          <div class="modal-metrics">
+            <div class="modal-metric"><span class="mm-val red" id="mmPatterns"></span><span class="mm-label">Dark Patterns</span></div>
+            <div class="modal-metric"><span class="mm-val amber" id="mmFees"></span><span class="mm-label">Hidden Fees</span></div>
+            <div class="modal-metric"><span class="mm-val" id="mmComplaints"></span><span class="mm-label">SEBI Complaints</span></div>
+          </div>
+        </div>
+        <div class="modal-violations" id="modalViolations"></div>
+        <div class="modal-actions">
+          <a id="modalReportLink" href="reports.html" class="btn-danger">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="white" stroke-width="2"/><path d="M12 8v4M12 16v.5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            Report to SEBI
+          </a>
+          <button class="btn-outline" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">HOW IT WORKS</div>
+        <h2 class="section-title">Your Complete Financial Shield</h2>
+      </div>
+      <div class="features-grid">
+        <a href="calculator.html" class="feature-card decode-card">
+          <div class="fc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#185FA5" stroke-width="2"/><path d="M21 21l-4-4" stroke="#185FA5" stroke-width="2" stroke-linecap="round"/><path d="M8 11h6M11 8v6" stroke="#185FA5" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="fc-title">Reality Check Calculator</h3>
+          <p class="fc-desc">Instantly see the true cost of any loan or EMI — including all hidden charges, processing fees &amp; insurance add-ons.</p>
+          <div class="fc-cta">Calculate Now →</div>
+        </a>
+        <a href="scanner.html" class="feature-card shield-card">
+          <div class="fc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#065F46" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#065F46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="fc-title">Insurance Policy Scanner</h3>
+          <p class="fc-desc">Upload your policy PDF and get a plain-language breakdown of what's covered, what's excluded &amp; hidden traps.</p>
+          <div class="fc-cta">Scan Policy →</div>
+        </a>
+        <a href="reports.html" class="feature-card expose-card">
+          <div class="fc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7h4l6-3v12l-6-3H3V7z" stroke="#991B1B" stroke-width="2" stroke-linejoin="round"/><path d="M6 13v3" stroke="#991B1B" stroke-width="2" stroke-linecap="round"/><path d="M15 7a5 5 0 010 10" stroke="#991B1B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="fc-title">SEBI Complaint Center</h3>
+          <p class="fc-desc">File a SEBI/IRDAI complaint with one tap. XPOSE auto-fills your report with screenshots, violated regulations &amp; evidence.</p>
+          <div class="fc-cta">Report Now →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL BANNER -->
+  <section class="install-section" id="install">
+    <div class="container">
+      <div class="install-card">
+        <div class="install-orb"></div>
+        <div class="install-content">
+          <div class="install-badge">FREE · No Sign Up · Zero Data Collection</div>
+          <h2 class="install-title">Start Protecting Yourself Today</h2>
+          <p class="install-sub">Join 2.47 lakh Indians who stopped losing money to dark patterns. Install XPOSE in 30 seconds.</p>
+          <div class="install-actions">
+            <a href="#install" class="btn-primary btn-lg" onclick="showToast(event)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="white"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Add to Chrome — Free
+            </a>
+            <div class="install-note">Works on all Chromium browsers · 2.4 MB · No account needed</div>
+          </div>
+        </div>
+        <div class="install-visual">
+          <div class="ext-preview">
+            <div class="ext-header">
+              <div class="ext-logo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><b style="color:#E24B4A">X</b>POSE</span>
+              </div>
+              <div class="ext-score-badge risky">Score: 42</div>
+            </div>
+            <div class="ext-warning">
+              <div class="ext-warn-icon">⚠️</div>
+              <div>
+                <div class="ext-warn-title">3 Dark Patterns Detected</div>
+                <div class="ext-warn-sub">Hidden insurance add-on · Pre-ticked box · Fake urgency timer</div>
+              </div>
+            </div>
+            <div class="ext-tabs">
+              <div class="ext-tab active">Decode</div>
+              <div class="ext-tab">Shield</div>
+              <div class="ext-tab">Expose</div>
+            </div>
+            <div class="ext-bubble">
+              <div class="ext-bubble-label">🤖 XPOSE AI</div>
+              <div class="ext-bubble-text">This loan page pre-selects an insurance policy worth ₹4,200 per year. The actual EMI is ₹3,840/mo but with hidden fees it becomes ₹4,120/mo...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:12px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><span class="logo-x">X</span><span class="logo-pose">POSE</span></span>
+          </div>
+          <p class="footer-brand-desc">Decodes, shields &amp; exposes financial manipulation for everyday Indians.</p>
+          <div class="footer-tagline">Zero data collection · Free forever</div>
+        </div>
+        <div class="footer-links-col">
+          <div class="footer-col-title">Tools</div>
+          <a href="calculator.html" class="footer-link">EMI Calculator</a>
+          <a href="scanner.html" class="footer-link">Insurance Scanner</a>
+          <a href="reports.html" class="footer-link">SEBI Reports</a>
+          <a href="index.html" class="footer-link">Leaderboard</a>
+        </div>
+        <div class="footer-links-col">
+          <div class="footer-col-title">Learn</div>
+          <a href="#" class="footer-link">Dark Patterns Guide</a>
+          <a href="#" class="footer-link">Know Your Rights</a>
+          <a href="#" class="footer-link">SEBI SCORES Portal</a>
+          <a href="#" class="footer-link">RBI Guidelines</a>
+        </div>
+        <div class="footer-links-col">
+          <div class="footer-col-title">Company</div>
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms</a>
+          <a href="#" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 XPOSE. Made in India 🇮🇳 · For India's 140 crore</div>
+        <div class="footer-disclaimer">XPOSE is an independent tool. Not affiliated with SEBI, IRDAI or RBI.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">
+    <div class="toast-icon">✅</div>
+    <div class="toast-text">
+      <div class="toast-title">Extension Added!</div>
+      <div class="toast-sub">XPOSE is now active on your browser.</div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

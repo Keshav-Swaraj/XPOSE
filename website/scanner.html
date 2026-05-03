@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insurance Policy Scanner | XPOSE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .tool-hero { padding: 120px 0 60px; text-align: center; }
+    .upload-box { max-width: 600px; margin: 0 auto 100px; background: rgba(255,255,255,0.02); border: 2px dashed rgba(255,255,255,0.1); border-radius: 20px; padding: 60px 40px; text-align: center; cursor: pointer; transition: 0.3s; }
+    .upload-box:hover { border-color: var(--safe); background: rgba(16, 185, 129, 0.05); }
+    .upload-icon { font-size: 48px; margin-bottom: 16px; }
+    .upload-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .upload-sub { font-size: 14px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="logo-x">X</span><span class="logo-pose">POSE</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="calculator.html" class="nav-link">EMI Calculator</a>
+        <a href="scanner.html" class="nav-link active">Insurance Scanner</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="tool-hero">
+      <div class="section-tag" style="color:var(--safe)">AI POWERED</div>
+      <h1 class="section-title">Insurance Policy Scanner</h1>
+      <p class="section-sub">Upload your 50-page insurance document. XPOSE AI will read it in 10 seconds and tell you exactly what is covered, what is hidden in the fine print, and the major exclusions.</p>
+    </div>
+
+    <div class="upload-box" onclick="alert('This feature connects to the XPOSE Python backend in the full version. Currently in Demo Mode.')">
+      <div class="upload-icon">📄</div>
+      <div class="upload-title">Drop your PDF policy here</div>
+      <div class="upload-sub">or click to browse files (Max 10MB)</div>
+      <br>
+      <button class="btn-outline" style="pointer-events:none">Browse Files</button>
+    </div>
+  </div>
+</body>
+</html>

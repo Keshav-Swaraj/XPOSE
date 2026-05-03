@@ -55,17 +55,23 @@ def explain_page(request: ExplainRequest):
     You are analyzing the text from: {request.url}
     
     CRITICAL INSTRUCTION: You MUST translate ALL user-facing text into {request.language}. If {request.language} is not English, the output arrays and descriptions MUST be in {request.language}.
-
+    
+    If the page content clearly belongs to a NON-FINANCIAL website (e.g. general search engine, wikipedia, non-ecommerce blog, general news, etc) and does NOT contain financial products, checkouts, or loans:
+    Set 'status' to 'Neutral' and provide a brief summary stating "XPOSE is resting. No financial risks detected here." Return empty lists for risks, highlights, and violations, and null for costs.
+    
+    Otherwise, if it IS a financial site:
     Extract the key terms, hidden fees, risks, and dark patterns from the text.
     Return a JSON object containing:
     1. 'summary': A simple, 2-sentence summary in {request.language}.
-    2. 'status': Either 'Safe', 'Attention', or 'Risky' (Keep this exactly as English).
+    2. 'status': Either 'Safe', 'Attention', 'Risky', or 'Neutral' (Keep this exactly as English).
     3. 'risks': A list of strings detailing specific risks or hidden fees found. MUST be translated to {request.language}.
     4. 'true_cost': If any fees or prices are mentioned, calculate a true cost string. Otherwise, return null. (Translate text to {request.language}).
-    5. 'highlights': A list of objects with 'text' (an exact, character-for-character short quote from the original English page so it can be highlighted), 'translated_text' (the translation of the quote in {request.language}), and 'level' ('safe', 'attention', or 'risky') for the top 3 most important clauses. Ensure 'text' is an exact substring of the original content.
-    6. 'est_cost_value': The estimated cost mentioned (e.g., '₹3,200', '₹378'). If none, return 'N/A'.
-    7. 'est_cost_label': A concise label for the cost. MUST be translated to {request.language}.
-    8. 'violations': A list of objects representing actual dark patterns or regulatory violations. Each object must have: 'pattern_name' (Translate to {request.language}), 'severity' ('high', 'med', 'low'), 'description' (what is wrong, Translate to {request.language}), and 'regulation' (the law or rule it likely violates, Translate to {request.language}). Only include actual deceptive practices or regulatory violations, NOT normal policy clauses.
+    5. 'violations': A list of objects representing ACTUAL dark patterns. Do NOT flag standard features (like "get policy instantly") or standard terms (like "I agree to terms") as violations. Each object: 'pattern_name' (Translate to {request.language}), 'severity' ('high', 'med', 'low'), 'description' (what is wrong, Translate to {request.language}), 'regulation' (Translate to {request.language}), and 'quote' (the EXACT English substring from the page that proves this).
+    6. 'highlights': A list of EXACTLY 3 objects to highlight on the page. 
+       - First, add objects for your violations. 'text' must be the exact English 'quote' from the violation, 'translated_text' is the {request.language} translation, and 'level' must be 'risky' (if high severity) or 'attention' (if med/low).
+       - Then, fill the rest of the 3 items with 'safe' highlights. For safe highlights, use standard good terms (like "I agree to terms" or "Pay now") and set 'level' to 'safe'.
+    7. 'est_cost_value': The estimated cost mentioned (e.g., '₹3,200', '₹378'). If none, return 'N/A'.
+    8. 'est_cost_label': A concise label for the cost. MUST be translated to {request.language}.
     
     Only output the JSON object. Do not output markdown code blocks.
     """

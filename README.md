@@ -1,14 +1,14 @@
 # 🛡️ XPOSE — Your Personal Financial Guardian
 
-> **"XPOSE explains, protects and fights for you."**
+> **"XPOSE decodes, shields & exposes."**
 
-XPOSE is a free **Chrome browser extension + AI backend** that protects everyday Indians from financial manipulation and confusion on the internet. It detects dark patterns, simplifies complex financial fine print in regional Indian languages, enables conversational Q&A about any financial page, and helps users file regulatory complaints — all in one tool.
+XPOSE is a free **Chrome browser extension + AI-powered web platform** that protects everyday Indians from financial manipulation on the internet. It detects dark patterns in real-time, explains complex financial pages in 10 Indian languages, enables conversational Q&A, provides voice narration, and helps users file regulatory complaints — all in one tool.
 
 ---
 
 ## 📌 The Problem
 
-Indian financial websites (loan portals, insurance aggregators, credit card pages, investment platforms) frequently use **dark patterns** — hidden fees, pre-ticked checkboxes, fake urgency timers, guilt-tripping language, and confusing jargon — that cost the average user thousands of rupees every year. Complex policy documents and loan agreements are especially hard to understand, particularly for first-time users, gig workers, and non-English speakers.
+Indian financial websites (loan portals, insurance aggregators, credit card pages, investment platforms) frequently use **dark patterns** — hidden fees, pre-ticked checkboxes, fake urgency timers, guilt-tripping language, and confusing jargon — that cost the average user thousands of rupees every year.
 
 **XPOSE exists to level this playing field.**
 
@@ -19,13 +19,19 @@ Indian financial websites (loan portals, insurance aggregators, credit card page
 ### 🔍 Smart Explain Mode (The Killer Feature)
 - Click the XPOSE icon or open the sidebar on any financial page.
 - The AI reads the entire page and returns a **plain-language summary** in your chosen Indian language.
-- **Color-coded highlights** mark key clauses directly:
+- **Color-coded highlights** mark key clauses directly on the webpage:
   - 🟢 **Green** = Safe
   - 🟡 **Yellow** = Needs Attention
   - 🔴 **Red** = Risky / Hidden Risk
 
+### 🛡️ Passive Real-Time Protection
+- XPOSE **automatically scans** every webpage for dark patterns in the background.
+- When manipulation is detected, a **pulsing red border** flashes around the page, toast notifications appear, and a **persistent floating shield badge** stays in the bottom-left corner.
+- Click the floating badge to instantly open the full XPOSE analysis panel.
+
 ### 🌐 Multilingual Support
 Supports **10 Indian languages** out of the box:
+
 | Language | Script |
 |---|---|
 | English | Latin |
@@ -39,45 +45,68 @@ Supports **10 Indian languages** out of the box:
 | Punjabi | ਪੰਜਾਬੀ |
 | Malayalam | മലയാളം |
 
-The AI summary, risk descriptions, and all chat responses are automatically delivered in the selected language.
-
 ### 🗣️ Voice Mode
-- Tap **"Listen"** in the footer to hear the AI summary spoken aloud in your selected language.
+- Tap **"Listen"** to hear the AI summary spoken aloud in your selected language.
 - Uses the Web Speech API with the correct BCP-47 locale (e.g., `hi-IN`, `ta-IN`, `kn-IN`) for natural-sounding narration.
-- Tap **"Stop"** to cancel at any time.
 
 ### 🧠 Conversational Q&A (AI Chat)
-- After the page is explained, ask follow-up questions in the chat box — in any language.
-- Examples: *"What happens if I miss an EMI?"*, *"Is this insurance worth it?"*, *"What are the hidden charges?"*
+- Ask follow-up questions in the chat box — in any language.
+- Examples: *"What happens if I miss an EMI?"*, *"Is this insurance worth it?"*
 - The AI answers **strictly based on the page content** — no hallucinations, grounded responses only.
-- Full conversation history is maintained for contextual follow-ups (last 10 messages sent to the model).
 
-### 🚨 Dark Pattern Detection (Shield Tab)
-- Automatically identifies **dark patterns** such as:
-  - Hidden/buried fees
-  - Pre-ticked consent boxes
-  - Fake urgency / countdown timers
-  - Guilt-tripping opt-out language
-  - Data harvesting disguised as "personalisation"
-- Each detected risk is shown as a **threat card** with severity level (High / Medium).
-- **True Cost Calculator**: If any fees or prices are mentioned, XPOSE calculates and displays the real total cost including hidden charges.
-- **Key Clauses** view: The top highlighted clauses from the page, color-coded by risk level.
+### 🚨 Dark Pattern Detection
+Automatically identifies **12+ dark pattern types**:
+- Hidden/buried fees & bait pricing
+- Pre-ticked consent checkboxes
+- Fake urgency / countdown timers
+- Guilt-tripping opt-out language (Confirmshaming)
+- Subscription traps & forced continuity
+- Disguised advertisements
+- Privacy Zuckering (data harvesting)
+- Roach Motel (easy signup, hard cancellation)
+- Fine print burial
 
-### ⚖️ Regulatory Action (Fight Tab)
-- Lists all **actual regulatory violations** found on the page with:
-  - Pattern name (e.g., *"Consent data harvesting"*, *"Price anchoring"*)
-  - Severity (Critical / Moderate)
-  - Description of what is wrong
-  - Specific regulation violated (e.g., *Consumer Protection Act*, *IRDAI guidelines*, *SEBI regulations*)
-- **One-tap SEBI/IRDAI Report**: Opens a pre-filled complaint modal with the page URL and extracted violations auto-populated. Mock integration with SCORES (real API planned).
+### ⚖️ One-Tap Regulatory Action
+- Lists all **regulatory violations** mapped to specific Indian regulations (SEBI, IRDAI, RBI, Consumer Protection Act).
+- **One-tap SEBI/IRDAI complaint**: Opens a pre-filled report with the page URL and extracted violations auto-populated.
 
 ### 📊 Safety Score
-- Every page gets an **XPOSE Safety Score out of 100**:
-  - **95/100** — Safe ✅
-  - **70/100** — Attention ⚠️
-  - **45/100** — Risky 🔴
-- Displayed as an animated circular gauge with color coding.
-- Accompanied by a metrics row showing: **Estimated yearly impact**, **Dark pattern count**, and **Regulation at risk**.
+Every page gets an **XPOSE Safety Score out of 100**:
+- **95/100** — Safe ✅
+- **70/100** — Attention ⚠️
+- **45/100** — Risky 🔴
+- **0/100** — Neutral (non-financial site) ⬜
+
+### 😴 Graceful Neutral State
+On non-financial websites (Wikipedia, blogs, news), XPOSE detects the context and enters a **"Resting" state** — showing a grey score ring with "No Financial Data" instead of awkwardly trying to scan for hidden fees.
+
+---
+
+## 🌐 XPOSE Web Platform (`xpose.in`)
+
+A standalone companion website that extends the extension's capabilities:
+
+### 🏆 Financial Manipulation Leaderboard
+- India's first **dark pattern ranking system** for financial websites.
+- Each site is scored by its **Pressure Score** — computed from community scans.
+- Filter by category: Insurance, Loans & Credit, Investments, Payments.
+
+### 📋 Shareable Score Pages
+- Click any site on the Leaderboard to open a **public, shareable scorecard**.
+- Shows the exact dark patterns found, regulations violated, and score trends.
+- **Copy Link** button to share on social media and hold companies accountable.
+
+### 🧮 Reality Check Calculator
+- See the **true cost** of any loan or EMI — including hidden processing fees, insurance add-ons, and GST.
+- Compare the advertised EMI vs. the actual EMI you'll pay.
+
+### 🔬 Insurance Policy Scanner
+- Upload any insurance policy PDF → get a plain-language breakdown.
+- Highlights what's covered, what's excluded, and hidden traps.
+
+### 📢 SEBI/IRDAI Complaint Center
+- File regulatory complaints with auto-filled evidence.
+- XPOSE generates the complaint with screenshots and violated regulations.
 
 ---
 
@@ -85,17 +114,31 @@ The AI summary, risk descriptions, and all chat responses are automatically deli
 
 ```
 XPOSE/
-├── extension/          # Chrome Extension (Plasmo + React + TypeScript)
+├── extension/                  # Chrome Extension (Plasmo + React + TypeScript)
 │   └── src/
 │       ├── contents/
-│       │   └── explainPanel.tsx   # Main sidebar panel (content script)
-│       ├── background.ts          # Service worker / message handler
-│       └── style.css              # Panel styles
+│       │   ├── explainPanel.tsx    # Main sidebar panel (Smart Explain, Chat, Voice)
+│       │   ├── alertOverlay.tsx    # Floating badge + red border + toast alerts
+│       │   ├── detector.ts        # Real-time dark pattern scanner (12+ patterns)
+│       │   └── translations.ts    # i18n strings for 10 languages
+│       ├── background.ts          # Service worker + icon animation
+│       └── style.css              # Panel styles (glassmorphism, dark mode)
 │
-└── backend/            # Python AI Backend (FastAPI + Groq)
-    ├── main.py         # API server with /api/explain and /api/chat
-    ├── requirements.txt
-    └── .env            # GROQ_API_KEY goes here
+├── backend/                    # Python AI Backend (FastAPI + Groq)
+│   ├── main.py                 # API server: /api/explain + /api/chat
+│   ├── requirements.txt
+│   └── .env                    # GROQ_API_KEY
+│
+└── website/                    # XPOSE Web Platform (Static HTML/CSS/JS)
+    ├── index.html              # Leaderboard + hero + features
+    ├── score.html              # Shareable individual scorecards
+    ├── calculator.html         # EMI Reality Check Calculator
+    ├── scanner.html            # Insurance PDF Scanner
+    ├── reports.html            # Regulatory Complaint Center
+    ├── css/main.css            # Design system (dark mode, glassmorphism)
+    └── js/
+        ├── main.js             # Leaderboard logic, filters, animations
+        └── data.js             # Mock data for Indian financial websites
 ```
 
 ---
@@ -110,14 +153,23 @@ XPOSE/
 | Styling | Tailwind CSS 3.4 |
 | Browser API | Chrome Extensions Manifest V3 |
 | Voice | Web Speech API (`SpeechSynthesis`) |
+| Dark Pattern Engine | Custom regex + DOM scanner + MutationObserver |
 
 ### Backend
 | Layer | Technology |
 |---|---|
 | Framework | FastAPI (Python) |
-| AI Model | `llama-3.3-70b-versatile` via [Groq](https://groq.com/) |
+| AI Model | `llama-3.1-8b-instant` via [Groq](https://groq.com/) |
 | Server | Uvicorn (ASGI) |
 | Data Validation | Pydantic v2 |
+
+### Website
+| Layer | Technology |
+|---|---|
+| Core | HTML5 + Vanilla CSS + JavaScript |
+| Design | Glassmorphism, dark mode, CSS animations |
+| Fonts | Google Fonts (Inter) |
+| Data | Static JSON (community-aggregated mock data) |
 
 ---
 
@@ -126,7 +178,7 @@ XPOSE/
 ### Prerequisites
 - Node.js ≥ 18 & pnpm
 - Python ≥ 3.10
-- A [Groq API Key](https://console.groq.com/) (free)
+- A [Groq API Key](https://console.groq.com/) (free tier available)
 
 ---
 
@@ -173,6 +225,17 @@ This starts Plasmo in development mode and outputs the extension to `extension/b
 
 ---
 
+### 3. Website Setup
+
+```bash
+cd website
+python -m http.server 8080
+```
+
+Open `http://localhost:8080` in your browser.
+
+---
+
 ## 🔌 API Reference
 
 ### `POST /api/explain`
@@ -197,8 +260,6 @@ Analyzes a financial page and returns structured insights.
     "risks": ["Hidden processing fee of ₹2,500", "..."],
     "true_cost": "₹1,23,450 over 3 years",
     "highlights": [{ "text": "...", "level": "risky" }],
-    "est_cost_value": "₹3,200",
-    "est_cost_label": "Est. yearly cost",
     "violations": [
       {
         "pattern_name": "Hidden fee disclosure",
@@ -210,8 +271,6 @@ Analyzes a financial page and returns structured insights.
   }
 }
 ```
-
----
 
 ### `POST /api/chat`
 Conversational Q&A grounded in the page content.
@@ -247,22 +306,32 @@ Conversational Q&A grounded in the page content.
 | Indian financial context | ✅ Specialized | ❌ Generic |
 | 10 Indian languages | ✅ Full support | ❌ English only |
 | Voice narration (regional) | ✅ Native BCP-47 | ❌ None |
-| Dark pattern detection | ✅ Regulation-mapped | ❌ None |
+| Real-time DOM scanning | ✅ Passive + active | ❌ None |
+| Dark pattern detection | ✅ 12+ types, regulation-mapped | ❌ None |
 | SEBI/IRDAI complaint filing | ✅ One-tap | ❌ None |
-| Conversational Q&A | ✅ Page-grounded | ❌ None |
+| Conversational Q&A | ✅ Page-grounded AI | ❌ None |
+| Web leaderboard | ✅ Public scorecards | ❌ None |
 | Data collection | ❌ Zero (privacy-first) | ⚠️ Varies |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Full UI i18n — all static text switches to the selected language
-- [ ] `xpose.in` web dashboard — live leaderboard & pressure scores per website
-- [ ] Insurance PDF scanner — upload policy → get simplified breakdown
-- [ ] SEBI SCORES real API integration
-- [ ] EMI / Reality Check Calculator
-- [ ] Family sharing (read-only view)
+- [x] Smart Explain Mode with multilingual AI
+- [x] Voice narration in 10 Indian languages
+- [x] Conversational AI Chat grounded in page content
+- [x] Real-time dark pattern detection (12+ pattern types)
+- [x] Passive floating warning badge on financial sites
+- [x] Graceful neutral state on non-financial sites
+- [x] XPOSE Web Dashboard with Leaderboard
+- [x] Shareable public scorecards per website
+- [x] EMI Reality Check Calculator
+- [x] Insurance Policy Scanner interface
+- [x] SEBI/IRDAI Complaint Center
 - [ ] Chrome Web Store public release
+- [ ] Full SEBI SCORES API integration
+- [ ] Supabase auth + personal savings tracker
+- [ ] Family sharing (read-only view)
 
 ---
 
@@ -272,4 +341,4 @@ MIT — Free forever for individual users.
 
 ---
 
-> Built with ❤️ for India's 500M+ internet users who deserve transparent financial products.
+> Built with ❤️ in India — for India's 140 crore people who deserve transparent financial products.

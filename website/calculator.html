@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI Reality Check Calculator | XPOSE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .tool-hero { padding: 120px 0 60px; text-align: center; }
+    .calc-container { max-width: 800px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; margin-bottom: 100px; }
+    .input-group { margin-bottom: 24px; text-align: left; }
+    .input-group label { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .input-group input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: #fff; padding: 12px 16px; border-radius: 8px; font-size: 16px; outline: none; }
+    .input-group input:focus { border-color: var(--accent); }
+    .result-box { margin-top: 40px; padding: 32px; background: rgba(226, 75, 74, 0.1); border: 1px solid rgba(226, 75, 74, 0.3); border-radius: 12px; text-align: center; }
+    .true-cost { font-size: 48px; font-weight: 800; color: var(--accent); line-height: 1; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="logo-x">X</span><span class="logo-pose">POSE</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="calculator.html" class="nav-link active">EMI Calculator</a>
+        <a href="scanner.html" class="nav-link">Insurance Scanner</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="tool-hero">
+      <div class="section-tag">REALITY CHECK</div>
+      <h1 class="section-title">EMI True Cost Calculator</h1>
+      <p class="section-sub">Stop getting tricked by "No Cost EMI" or "Low Interest". Find the actual amount you'll pay including processing fees, forced insurance, and hidden charges.</p>
+    </div>
+
+    <div class="calc-container">
+      <div class="input-group">
+        <label>Loan Amount (₹)</label>
+        <input type="number" placeholder="e.g., 50000" id="loanAmt" value="50000">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="input-group">
+          <label>Interest Rate (% p.a.)</label>
+          <input type="number" placeholder="12" id="interest" value="12">
+        </div>
+        <div class="input-group">
+          <label>Tenure (Months)</label>
+          <input type="number" placeholder="12" id="tenure" value="12">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Hidden Charges (Processing fee, insurance add-ons etc. in ₹)</label>
+        <input type="number" placeholder="e.g., 2500" id="fees" value="2500">
+      </div>
+      
+      <button class="btn-primary btn-lg" style="width:100%;justify-content:center" onclick="calc()">Calculate True Cost</button>
+
+      <div class="result-box" id="result" style="display:none">
+        <div class="section-tag" style="color:#FCA5A5">THE TRUTH</div>
+        <div class="true-cost" id="totalCost">₹0</div>
+        <div style="color:#FCA5A5" id="breakdown"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calc() {
+      const P = parseFloat(document.getElementById('loanAmt').value);
+      const r = parseFloat(document.getElementById('interest').value) / 12 / 100;
+      const n = parseFloat(document.getElementById('tenure').value);
+      const fees = parseFloat(document.getElementById('fees').value) || 0;
+      
+      if(P && r && n) {
+        const emi = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+        const total = (emi * n) + fees;
+        const effectiveRate = ((total - P) / P) * 100;
+        
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('totalCost').textContent = '₹' + Math.round(total).toLocaleString('en-IN');
+        document.getElementById('breakdown').innerHTML = `
+          You are paying <strong>₹${Math.round(total - P).toLocaleString('en-IN')}</strong> extra over ${n} months.<br>
+          Effective interest rate is roughly <strong>${effectiveRate.toFixed(1)}%</strong>, not ${document.getElementById('interest').value}%.
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

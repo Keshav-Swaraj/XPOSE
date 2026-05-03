@@ -15,6 +15,7 @@ export const getStyle = () => {
 export default function AlertOverlay() {
   const [alerts, setAlerts] = useState<{type: string, message: string, id: number}[]>([])
   const [showBorder, setShowBorder] = useState(false)
+  const [hasPatterns, setHasPatterns] = useState(false)
 
   useEffect(() => {
     const handleAlert = (event: Event) => {
@@ -23,6 +24,7 @@ export default function AlertOverlay() {
       
       setAlerts(prev => [...prev, newAlert])
       setShowBorder(true)
+      setHasPatterns(true)
       
       // Auto-hide toast after 8 seconds
       setTimeout(() => {
@@ -39,10 +41,30 @@ export default function AlertOverlay() {
     return () => window.removeEventListener("XPOSE_DARK_PATTERN_DETECTED", handleAlert)
   }, [])
 
-  if (alerts.length === 0 && !showBorder) return null
+  const openSidebar = () => {
+    chrome.runtime.sendMessage({ action: "TOGGLE_XPOSE_SIDEBAR" }).catch(err => {
+      console.warn("Could not toggle sidebar from overlay", err)
+    })
+  }
+
+  if (alerts.length === 0 && !showBorder && !hasPatterns) return null
 
   return (
     <div className="fixed inset-0 z-[9999999] pointer-events-none font-sans">
+      {/* Persistent Floating Badge in Bottom Left */}
+      {hasPatterns && (
+        <div 
+          className="absolute bottom-6 left-6 pointer-events-auto cursor-pointer"
+          onClick={openSidebar}
+          title="Dark Patterns Detected! Click to open XPOSE"
+        >
+          <div className="relative flex items-center justify-center bg-red-600 text-white rounded-full p-3 shadow-[0_4px_20px_rgba(220,38,38,0.6)] hover:scale-105 transition-transform">
+            <div className="absolute inset-0 rounded-full animate-ping bg-red-500 opacity-20"></div>
+            <span className="text-xl relative z-10">🛡️</span>
+          </div>
+        </div>
+      )}
+
       {/* Pulsing Red Border around the webpage */}
       <div 
         className={`absolute inset-0 pointer-events-none transition-opacity duration-500 border-[6px] border-red-500/80 shadow-[inset_0_0_80px_rgba(239,68,68,0.4)] ${showBorder ? 'opacity-100 animate-pulse' : 'opacity-0'}`} 

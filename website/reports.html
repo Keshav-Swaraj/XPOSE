@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEBI/IRDAI Complaint Center | XPOSE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .tool-hero { padding: 120px 0 60px; text-align: center; }
+    .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto 100px; }
+    .report-card { background: var(--bg-card); border: 1px solid var(--glass-border); padding: 40px; border-radius: 20px; text-align: center; }
+    .rc-icon { font-size: 48px; margin-bottom: 24px; }
+    .rc-title { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+    .rc-desc { color: var(--text-muted); margin-bottom: 32px; font-size: 15px; }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#E24B4A"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><span class="logo-x">X</span><span class="logo-pose">POSE</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Leaderboard</a>
+        <a href="calculator.html" class="nav-link">EMI Calculator</a>
+        <a href="scanner.html" class="nav-link">Insurance Scanner</a>
+        <a href="reports.html" class="nav-link active">Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="tool-hero">
+      <div class="section-tag" style="color:var(--critical)">TAKE ACTION</div>
+      <h1 class="section-title">Regulatory Reporting Center</h1>
+      <p class="section-sub">Spotted a dark pattern that violates Indian financial regulations? Report it directly to the authorities. XPOSE helps structure your evidence for faster resolution.</p>
+    </div>
+
+    <div class="report-grid">
+      <div class="report-card">
+        <div class="rc-icon">⚖️</div>
+        <h3 class="rc-title">Report to SEBI</h3>
+        <p class="rc-desc">For violations by stock brokers, mutual funds, and investment platforms. (SCORES Integration)</p>
+        <button class="btn-danger" onclick="alert('Demo Mode: In production, this links to the SEBI SCORES API.')">File SEBI Complaint</button>
+      </div>
+      <div class="report-card">
+        <div class="rc-icon">🏦</div>
+        <h3 class="rc-title">Report to RBI / IRDAI</h3>
+        <p class="rc-desc">For hidden loan fees, pre-ticked insurance boxes, and banking fraud. (Ombudsman Integration)</p>
+        <button class="btn-primary btn-lg" style="width:100%" onclick="alert('Demo Mode: In production, this generates an auto-filled RBI Ombudsman PDF.')">File RBI/IRDAI Complaint</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

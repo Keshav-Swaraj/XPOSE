@@ -72,6 +72,15 @@ export default function ExplainPanel() {
     return () => chrome.runtime.onMessage.removeListener(h)
   }, [])
 
+  // Pre-load voices
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      const loadVoices = () => window.speechSynthesis.getVoices();
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, [])
+
   // Auto scroll chat
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }) }, [chatHistory])
 
@@ -209,7 +218,23 @@ export default function ExplainPanel() {
     const utt = new SpeechSynthesisUtterance(explanation.summary)
     utt.lang = lang
     const voices = speechSynthesis.getVoices()
-    const match = voices.find(v => v.lang.startsWith(lang.split("-")[0]))
+    
+    const targetBase = lang.split("-")[0].toLowerCase()
+    let match = voices.find(v => v.lang.replace('_', '-').toLowerCase() === lang.toLowerCase())
+    
+    if (!match) match = voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetBase))
+    
+    if (!match) {
+        if (targetBase === 'hi') match = voices.find(v => v.name.includes('Hindi') || v.name.includes('हिन्दी'));
+        else if (targetBase === 'kn') match = voices.find(v => v.name.includes('Kannada') || v.name.includes('ಕನ್ನಡ'));
+        else if (targetBase === 'ta') match = voices.find(v => v.name.includes('Tamil') || v.name.includes('தமிழ்'));
+        else if (targetBase === 'te') match = voices.find(v => v.name.includes('Telugu') || v.name.includes('తెలుగు'));
+        else if (targetBase === 'mr') match = voices.find(v => v.name.includes('Marathi') || v.name.includes('मराठी'));
+        else if (targetBase === 'bn') match = voices.find(v => v.name.includes('Bengali') || v.name.includes('বাংলা'));
+        else if (targetBase === 'gu') match = voices.find(v => v.name.includes('Gujarati') || v.name.includes('ગુજરાતી'));
+        else if (targetBase === 'ml') match = voices.find(v => v.name.includes('Malayalam') || v.name.includes('മലയാളം'));
+    }
+
     if (match) utt.voice = match
     utt.onend = () => setSpeaking(false)
     setSpeaking(true)
@@ -262,6 +287,10 @@ export default function ExplainPanel() {
     score = 45;
     strokeDashOffset = 188.5 - (188.5 * score / 100);
     scoreColor = "#E24B4A"; // red
+  } else if (explanation?.status === "Neutral") {
+    score = 0;
+    strokeDashOffset = 188.5;
+    scoreColor = "#9CA3AF"; // gray
   }
 
   return (
@@ -301,7 +330,12 @@ export default function ExplainPanel() {
                   </div>
                 </div>
                 <div className="score-info">
-                  <div className="score-title" style={{ color: scoreColor }}>{explanation.status === "Safe" ? t.safe_to_proceed : explanation.status === "Attention" ? t.mod_risk : t.high_risk}</div>
+                  <div className="score-title" style={{ color: scoreColor }}>
+                    {explanation.status === "Safe" ? t.safe_to_proceed : 
+                     explanation.status === "Attention" ? t.mod_risk : 
+                     explanation.status === "Risky" ? t.high_risk : 
+                     "No Financial Data"}
+                  </div>
                   <div className="score-sub">{t.found_on} <strong>{new URL(window.location.href).hostname}</strong><br/>{darkPatternsCount} {t.dark_patterns} · {explanation.highlights?.length || 0} {t.risky_clauses}</div>
                 </div>
               </div>
@@ -490,7 +524,7 @@ export default function ExplainPanel() {
                 <svg viewBox="0 0 14 14" fill="none"><path d="M2 5.5h2l3-2v7l-3-2H2a.5.5 0 01-.5-.5v-2A.5.5 0 012 5.5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/><path d="M9 5a3 3 0 010 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/><path d="M10.5 3.5a5.5 5.5 0 010 7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
                 {speaking ? t.stop : t.listen}
               </button>
-              <a href="https://xpose.in" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', display: 'flex', flex: 1 }}>
+              <a href="http://localhost:8080" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', display: 'flex', flex: 1 }}>
                 <button className="f-btn primary" style={{ width: '100%', background: '#E24B4A', borderColor: '#E24B4A' }}>
                   <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   XPOSE.in
