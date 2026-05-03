@@ -82,7 +82,7 @@
 .tab svg{width:15px;height:15px}
 .tab.active.decode{color:#185FA5;border-bottom-color:#185FA5}
 .tab.active.shield{color:#065F46;border-bottom-color:#1D9E75}
-.tab.active.fight{color:#991B1B;border-bottom-color:#E24B4A}
+.tab.active.expose{color:#991B1B;border-bottom-color:#E24B4A}
 
 .pane{display:none;height:320px;overflow-y:auto}
 .pane.active{display:block}

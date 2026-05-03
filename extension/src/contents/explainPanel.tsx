@@ -34,7 +34,7 @@ type Explanation = {
   est_cost_label?: string
   violations?: Violation[]
 }
-type Tab = "decode" | "shield" | "fight"
+type Tab = "decode" | "shield" | "expose"
 
 export default function ExplainPanel() {
   const [isOpen, setIsOpen] = useState(false)
@@ -218,16 +218,16 @@ export default function ExplainPanel() {
 
             <div className="tabs shrink-0">
               <div className={`tab decode ${tab === 'decode' ? 'active' : ''}`} onClick={() => setTab('decode')}>
-                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#185FA5" strokeWidth="1.5"/><path d="M8 5v3l2 1.5" stroke="#185FA5" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4" stroke="#185FA5" strokeWidth="1.5"/><path d="M10 10l3 3" stroke="#185FA5" strokeWidth="1.5" strokeLinecap="round"/><path d="M5 6.5h3M6.5 5v3" stroke="#185FA5" strokeWidth="1.2" strokeLinecap="round"/></svg>
                 Decode
               </div>
               <div className={`tab shield ${tab === 'shield' ? 'active' : ''}`} onClick={() => setTab('shield')}>
-                <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6 6 7 3.5-1 6-3.5 6-7V4L8 1.5z" stroke="#065F46" strokeWidth="1.5"/></svg>
+                <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 2.5 6 6 7 3.5-1 6-3.5 6-7V4L8 1.5z" stroke="#065F46" strokeWidth="1.5"/><path d="M5.5 8l2 2 3-3" stroke="#065F46" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 Shield
               </div>
-              <div className={`tab fight ${tab === 'fight' ? 'active' : ''}`} onClick={() => setTab('fight')}>
-                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8h8M10 5l3 3-3 3" stroke="#991B1B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                Fight
+              <div className={`tab expose ${tab === 'expose' ? 'active' : ''}`} onClick={() => setTab('expose')}>
+                <svg viewBox="0 0 16 16" fill="none"><path d="M2 6h3l5-3v8l-5-3H2V6z" stroke="#991B1B" strokeWidth="1.4" strokeLinejoin="round"/><path d="M5 9.5v2.5" stroke="#991B1B" strokeWidth="1.4" strokeLinecap="round"/><path d="M12 6a3 3 0 010 4" stroke="#991B1B" strokeWidth="1.4" strokeLinecap="round"/></svg>
+                Expose
               </div>
             </div>
 
@@ -343,7 +343,7 @@ export default function ExplainPanel() {
                 </div>
               )}
 
-              {tab === 'fight' && (
+              {tab === 'expose' && (
                 <div className="pane active flex-1 overflow-y-auto">
                   <div className="fight-pane">
                     <div className="fight-intro">
@@ -378,15 +378,15 @@ export default function ExplainPanel() {
 
             <div className="footer-bar shrink-0">
               <button className="f-btn" onClick={handleExplain} disabled={loading}>
-                <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 2a5 5 0 019 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none"/><path d="M7 12a5 5 0 01-5-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none"/><path d="M13 2v2.5h-2.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/><path d="M1 12v-2.5h2.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 {loading ? "Scanning..." : "Re-scan"}
               </button>
               <button className="f-btn" onClick={handleVoice}>
-                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM7 4.5v2.5l2 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <svg viewBox="0 0 14 14" fill="none"><path d="M2 5.5h2l3-2v7l-3-2H2a.5.5 0 01-.5-.5v-2A.5.5 0 012 5.5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/><path d="M9 5a3 3 0 010 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/><path d="M10.5 3.5a5.5 5.5 0 010 7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
                 {speaking ? "Stop" : "Listen"}
               </button>
               <a href="https://xpose.in" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', display: 'flex', flex: 1 }}>
-                <button className="f-btn primary" style={{ width: '100%' }}>
+                <button className="f-btn primary" style={{ width: '100%', background: '#E24B4A', borderColor: '#E24B4A' }}>
                   <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   XPOSE.in
                 </button>
