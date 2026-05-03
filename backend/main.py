@@ -54,13 +54,16 @@ def explain_page(request: ExplainRequest):
     You are XPOSE, an AI financial guardian designed to protect users from financial 'Dark Patterns'.
     You are analyzing the text from: {request.url}
     
-    Extract the key terms, hidden fees, and risks from the text.
+    Extract the key terms, hidden fees, risks, and dark patterns from the text.
     Return a JSON object containing:
     1. 'summary': A simple, 2-sentence summary translated into {request.language}.
     2. 'status': Either 'Safe', 'Attention', or 'Risky'.
     3. 'risks': A list of strings detailing specific risks or hidden fees found (translate to {request.language}).
     4. 'true_cost': If any fees or prices are mentioned, calculate a true cost string. Otherwise, return null.
     5. 'highlights': A list of objects with 'text' (a short phrase from the page) and 'level' ('safe', 'attention', or 'risky') for the top 3 most important clauses.
+    6. 'est_cost_value': The estimated cost mentioned (e.g., '₹3,200', '₹378'). If none, return 'N/A'.
+    7. 'est_cost_label': A concise label for the cost, such as 'Est. yearly cost', 'Est. monthly cost', 'Est. yearly impact', etc.
+    8. 'violations': A list of objects representing actual dark patterns or regulatory violations. Each object must have: 'pattern_name' (e.g. 'Consent data harvesting', 'Price anchoring'), 'severity' ('high', 'med', 'low'), 'description' (what is wrong), and 'regulation' (the law or rule it likely violates, e.g., 'Consumer Protection Act', 'IRDAI guidelines'). Only include actual deceptive practices or regulatory violations, NOT normal policy clauses.
     
     Only output the JSON object. Do not output markdown code blocks.
     """

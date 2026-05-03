@@ -24,11 +24,15 @@ const LANGUAGES: { code: string; label: string; bcp47: string }[] = [
 ]
 
 type ChatMsg = { role: "user" | "assistant"; content: string }
+type Violation = { pattern_name: string; severity: string; description: string; regulation: string }
+
 type Explanation = {
   status: string; summary: string; risks: string[]
   true_cost: string | null; highlights?: { text: string; level: string }[]
   dark_patterns_count?: number
-  est_yearly_impact?: string
+  est_cost_value?: string
+  est_cost_label?: string
+  violations?: Violation[]
 }
 type Tab = "decode" | "shield" | "fight"
 
@@ -198,8 +202,8 @@ export default function ExplainPanel() {
               </div>
               <div className="metrics-row">
                 <div className="metric-box">
-                  <div className={`metric-val ${explanation.status === "Safe" ? "green" : explanation.status === "Attention" ? "amber" : "red"}`}>{explanation.est_yearly_impact || "₹3,200"}</div>
-                  <div className="metric-label">Est. yearly impact</div>
+                  <div className={`metric-val ${explanation.status === "Safe" ? "green" : explanation.status === "Attention" ? "amber" : "red"}`}>{explanation.est_cost_value || "N/A"}</div>
+                  <div className="metric-label">{explanation.est_cost_label || "Est. yearly impact"}</div>
                 </div>
                 <div className="metric-box">
                   <div className={`metric-val ${darkPatternsCount > 0 ? "amber" : ""}`}>{darkPatternsCount}</div>
@@ -343,21 +347,21 @@ export default function ExplainPanel() {
                 <div className="pane active flex-1 overflow-y-auto">
                   <div className="fight-pane">
                     <div className="fight-intro">
-                      <strong>{explanation.risks?.length || 0} violations found on this page</strong>
+                      <strong>{explanation.violations?.length || 0} violations found on this page</strong>
                       These practices likely violate regulations. You have the right to report them.
                     </div>
 
-                    {explanation.risks && explanation.risks.map((risk, i) => (
+                    {explanation.violations && explanation.violations.map((v, i) => (
                       <div key={i} className="pattern-card">
                         <div className="pattern-header">
-                          <div className="pattern-name">Detected Violation</div>
-                          <div className="pattern-sev high">Critical</div>
+                          <div className="pattern-name">{v.pattern_name}</div>
+                          <div className={`pattern-sev ${v.severity === 'high' ? 'high' : 'med'}`}>{v.severity === 'high' ? 'Critical' : 'Moderate'}</div>
                         </div>
-                        <div className="pattern-what">{risk}</div>
+                        <div className="pattern-what">{v.description}</div>
                         <div className="pattern-divider"></div>
                         <div className="law-row">
                           <div className="law-badge">Regulation</div>
-                          <div className="law-text">May violate consumer protection guidelines regarding transparent disclosures.</div>
+                          <div className="law-text">{v.regulation}</div>
                         </div>
                       </div>
                     ))}
